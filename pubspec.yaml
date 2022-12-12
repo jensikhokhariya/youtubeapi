@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^4.1.5
   google_sign_in: ^5.4.2
   firebase_database: ^10.0.6
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

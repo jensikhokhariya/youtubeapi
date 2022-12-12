@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../provider/lrprovider.dart';
+import 'package:youtubeapi/screen/provider/lrprovider.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _Login_PageState extends State<Login_Page> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Log in"),
+          title: Text("Login"),
           centerTitle: true,
         ),
         body: Container(
@@ -51,13 +51,32 @@ class _Login_PageState extends State<Login_Page> {
                 onPressed: () async {
                   var res = await hprovider.createuser(e1.text, p1.text);
                   print(res);
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("$res")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("$res"),
+                    ),
+                  );
                   if (res == "Success") {
                     Navigator.pushReplacementNamed(context, 'home');
                   }
                 },
-                child: Text("Log In"),
+                child: Text("Log in"),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {
+                  hprovider.googleSignIn();
+                },
+                child: Image.network(
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'res');
+                },
+                child: Text("create account | Sign in"),
               ),
             ],
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youtubeapi/screen/provider/lrprovider.dart';
+import '../provider/lrprovider.dart';
 
 class Register_Page extends StatefulWidget {
   const Register_Page({Key? key}) : super(key: key);
@@ -51,26 +51,14 @@ class _Register_PageState extends State<Register_Page> {
                 onPressed: () async {
                   var res = await hprovider.createuser(e1.text, p1.text);
                   print(res);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("$res"),
-                    ),
-                  );
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("$res")));
                   if (res == "Success") {
-                    Navigator.pushReplacementNamed(context, 'log');
+                    Navigator.pushReplacementNamed(context, 'home');
+                    Navigator.pop(context);
                   }
                 },
-                child: Text("Sign in"),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  hprovider.googleSignIn();
-                },
-                child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"),
+                child: Text("Sign up"),
               ),
             ],
           ),

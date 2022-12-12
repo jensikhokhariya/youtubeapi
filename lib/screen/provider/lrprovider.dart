@@ -8,7 +8,7 @@ class LProvider extends ChangeNotifier{
     var firebaseAuth = FirebaseAuth.instance;
 
     try {
-      var res = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+      var res = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
       note = "Success";
     }on FirebaseAuthException catch (e){
