@@ -49,14 +49,14 @@ class _Login_PageState extends State<Login_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var res = await hprovider.createuser(e1.text, p1.text);
-                  print(res);
+                  var re = await hprovider.createuser(e1.text, p1.text);
+                  print(re);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text("$res"),
+                      content: Text("$re"),
                     ),
                   );
-                  if (res == "Success") {
+                  if (re == "Success") {
                     Navigator.pushReplacementNamed(context, 'home');
                   }
                 },

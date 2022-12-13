@@ -1,5 +1,5 @@
 class YouTube {
-  List<dynamic>? videos;
+  List? videos;
 
   YouTube({this.videos});
 
