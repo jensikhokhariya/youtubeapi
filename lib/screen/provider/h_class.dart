@@ -4,7 +4,7 @@ import 'package:youtubeapi/screen/provider/homeprovider.dart';
 
 class YoutubeData {
   Future<YouTube> getData(String name) async {
-    String link = "https://www.googleapis.com/youtube/v3/videos?id=";
+    String link = "https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM&fields=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics";
     Uri uri = Uri.parse(link);
     var res = await http.get(uri);
     var v1 = jsonDecode(res.body);
@@ -14,4 +14,4 @@ class YoutubeData {
 }
 // var data = jsonDecode(abc.body);
 // return data.map((e) => Apimodel().apiFactory(e)).toList();
-//https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics
+//https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM&fields=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics
