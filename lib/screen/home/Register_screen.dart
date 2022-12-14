@@ -12,7 +12,7 @@ class _Register_PageState extends State<Register_Page> {
   TextEditingController e1 = TextEditingController();
   TextEditingController p1 = TextEditingController();
   LProvider hprovider = LProvider();
-
+  bool login = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,7 +55,6 @@ class _Register_PageState extends State<Register_Page> {
                       .showSnackBar(SnackBar(content: Text("$re")));
                   if (re == "Success") {
                     Navigator.pushReplacementNamed(context, 'home');
-                    Navigator.pop(context);
                   }
                 },
                 child: Text("Sign up"),

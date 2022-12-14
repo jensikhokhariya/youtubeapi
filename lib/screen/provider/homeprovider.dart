@@ -1,5 +1,5 @@
 class YouTube {
-  List? videos;
+  List<dynamic>? videos;
 
   YouTube({this.videos});
 
@@ -33,14 +33,14 @@ class Videos {
   Videos vFactory(Map map) {
     return Videos(
       id: map['id'],
+      title: map['title'],
+      categoryId: map['categoryId'],
+      chanelId: map['chanelId'],
       viewCount: map['viewCount'],
       likeCount: map['likeCount'],
       favoriteCount: map['favoriteCount'],
       dislikeCount: map['dislikeCount'],
       commentCount: map['commentCount'],
-      title: map['title'],
-      categoryId: map['categoryId'],
-      chanelId: map['chanelId'],
     );
   }
 }

@@ -18,14 +18,43 @@ class _Home_PageState extends State<Home_Page> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(actions: [
-          IconButton(
-              onPressed: () {
-                hprovider.signOut();
-                Navigator.pushReplacementNamed(context, '/');
-              },
-              icon: Icon(Icons.logout_rounded))
-        ]),
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+        ),
+        drawer: Drawer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 50,
+                width: 400,
+                color: Colors.red,
+                child: DrawerHeader(
+                  child: Text(
+                    "Sign out",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ListTile(
+                leading: IconButton(
+                  onPressed: () {
+                    hprovider.signOut();
+                    Navigator.pushReplacementNamed(context, '/');
+                  },
+                  icon: Icon(Icons.logout_rounded,color: Colors.black,),
+                ),
+                trailing: Text("Sign out"),
+              ),
+            ],
+          ),
+        ),
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -48,7 +77,8 @@ class _Home_PageState extends State<Home_Page> {
                                     itemCount: l1.videos!.length,
                                     itemBuilder: (context, index) {
                                       return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text("${l1.videos![index].id}"),
                                           SizedBox(
@@ -58,20 +88,29 @@ class _Home_PageState extends State<Home_Page> {
                                           SizedBox(
                                             height: 5,
                                           ),
-                                          Text("${l1.videos![index].categoryId}"),
+                                          Text(
+                                              "${l1.videos![index].categoryId}"),
                                           SizedBox(
                                             height: 5,
                                           ),
                                           Text("${l1.videos![index].title}"),
-                                          SizedBox(height: 5,),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              Text("${l1.videos![index].viewCount}"),
-                                              Text("${l1.videos![index].likeCount}"),
-                                              Text("${l1.videos![index].dislikeCount}"),
-                                              Text("${l1.videos![index].favoriteCount}"),
-                                              Text("${l1.videos![index].commentCount}"),
+                                              Text(
+                                                  "${l1.videos![index].viewCount}"),
+                                              Text(
+                                                  "${l1.videos![index].likeCount}"),
+                                              Text(
+                                                  "${l1.videos![index].dislikeCount}"),
+                                              Text(
+                                                  "${l1.videos![index].favoriteCount}"),
+                                              Text(
+                                                  "${l1.videos![index].commentCount}"),
                                             ],
                                           ),
                                         ],

@@ -12,6 +12,7 @@ class _Login_PageState extends State<Login_Page> {
   TextEditingController e1 = TextEditingController();
   TextEditingController p1 = TextEditingController();
   LProvider hprovider = LProvider();
+  bool login = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +59,7 @@ class _Login_PageState extends State<Login_Page> {
                   );
                   if (re == "Success") {
                     Navigator.pushReplacementNamed(context, 'home');
+                    hprovider.cheakUser();
                   }
                 },
                 child: Text("Log in"),
@@ -66,11 +68,10 @@ class _Login_PageState extends State<Login_Page> {
                 height: 20,
               ),
               GestureDetector(
-                onTap: () {
-                  hprovider.googleSignIn();
+                onTap: (){
+                hprovider.googleSignIn();
                 },
-                child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"),
+                child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"),
               ),
               TextButton(
                 onPressed: () {
@@ -85,3 +86,4 @@ class _Login_PageState extends State<Login_Page> {
     );
   }
 }
+// "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"
