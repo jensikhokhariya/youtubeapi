@@ -18,7 +18,6 @@ class Videos {
       dislikeCount,
       favoriteCount,
       commentCount;
-
   Videos(
       {this.id,
       this.chanelId,
