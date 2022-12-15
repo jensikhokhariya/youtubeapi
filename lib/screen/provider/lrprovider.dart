@@ -2,12 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LProvider extends ChangeNotifier{
-  Future<String> createuser(String email,String password)async{
+class LProvider extends ChangeNotifier {
+  Future<String> createuser(String email, String password)async {
     String note = "";
     var firebaseAuth = FirebaseAuth.instance;
 
-    try {
+    try{
       var res = await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password);
 
       note = "Success";
@@ -22,15 +22,15 @@ class LProvider extends ChangeNotifier{
     }
     return note;
   }
-  Future<String> loginuser(String email,String password)async{
+  Future<String> loginuser(String email, String password)async {
     String note = "";
     var firebaseAuth = FirebaseAuth.instance;
 
-    try {
+    try{
       var res = await firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
       note = "Success";
-    }on FirebaseAuthException catch(e){
+    }on FirebaseAuthException catch (e){
       if(e.code == 'user-not-found'){
         note = 'No user found for that email.';
       }else if(e.code == 'wrong-password'){
@@ -64,4 +64,5 @@ class LProvider extends ChangeNotifier{
     var firebaseAuth = FirebaseAuth.instance;
     firebaseAuth.signInWithCredential(crd);
   }
+
 }

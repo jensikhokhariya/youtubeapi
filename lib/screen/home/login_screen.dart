@@ -68,10 +68,11 @@ class _Login_PageState extends State<Login_Page> {
                 height: 20,
               ),
               GestureDetector(
-                onTap: (){
-                hprovider.googleSignIn();
+                onTap: () {
+                  hprovider.googleSignIn();
                 },
-                child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"),
+                child: Image.network("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"
+                ),
               ),
               TextButton(
                 onPressed: () {
@@ -86,4 +87,3 @@ class _Login_PageState extends State<Login_Page> {
     );
   }
 }
-// "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShJvJeICVmrqFtHG1UX9TC8qPMJwuN-K3sUy9JdmHfulwwNg6AfanEyvXV_1I8qvmbRw&usqp=CAU"

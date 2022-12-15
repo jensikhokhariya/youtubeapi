@@ -12,6 +12,4 @@ class YoutubeData {
     return YouTube().youTubeFactory(v1);
   }
 }
-// var data = jsonDecode(abc.body);
-// return data.map((e) => Apimodel().apiFactory(e)).toList();
 //https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM&fields=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics

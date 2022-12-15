@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:youtubeapi/screen/home/login_screen.dart';
 import 'package:youtubeapi/screen/provider/h_class.dart';
 import 'package:youtubeapi/screen/provider/homeprovider.dart';
 import '../provider/lrprovider.dart';
@@ -13,6 +15,7 @@ class Home_Page extends StatefulWidget {
 class _Home_PageState extends State<Home_Page> {
   LProvider hprovider = LProvider();
   String data = "";
+  bool login = false;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,10 @@ class _Home_PageState extends State<Home_Page> {
                     hprovider.signOut();
                     Navigator.pushReplacementNamed(context, '/');
                   },
-                  icon: Icon(Icons.logout_rounded,color: Colors.black,),
+                  icon: Icon(
+                    Icons.logout_rounded,
+                    color: Colors.black,
+                  ),
                 ),
                 trailing: Text("Sign out"),
               ),
@@ -74,48 +80,48 @@ class _Home_PageState extends State<Home_Page> {
                             children: [
                               Expanded(
                                 child: ListView.builder(
-                                    itemCount: l1.videos!.length,
-                                    itemBuilder: (context, index) {
-                                      return Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("${l1.videos![index].id}"),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text("${l1.videos![index].chanelId}"),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text(
-                                              "${l1.videos![index].categoryId}"),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Text("${l1.videos![index].title}"),
-                                          SizedBox(
-                                            height: 5,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                  "${l1.videos![index].viewCount}"),
-                                              Text(
-                                                  "${l1.videos![index].likeCount}"),
-                                              Text(
-                                                  "${l1.videos![index].dislikeCount}"),
-                                              Text(
-                                                  "${l1.videos![index].favoriteCount}"),
-                                              Text(
-                                                  "${l1.videos![index].commentCount}"),
-                                            ],
-                                          ),
-                                        ],
-                                      );
-                                    }),
+                                  itemCount: l1.videos!.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("${l1.videos![index].id}"),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("${l1.videos![index].chanelId}"),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("${l1.videos![index].categoryId}"),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text("${l1.videos![index].title}"),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                                "${l1.videos![index].viewCount}"),
+                                            Text(
+                                                "${l1.videos![index].likeCount}"),
+                                            Text(
+                                                "${l1.videos![index].dislikeCount}"),
+                                            Text(
+                                                "${l1.videos![index].favoriteCount}"),
+                                            Text(
+                                                "${l1.videos![index].commentCount}"),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -131,3 +137,4 @@ class _Home_PageState extends State<Home_Page> {
     );
   }
 }
+// child: login == false ? Login_Page() : Home_Page(),
