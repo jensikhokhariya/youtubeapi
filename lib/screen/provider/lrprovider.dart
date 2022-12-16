@@ -44,9 +44,8 @@ class LProvider extends ChangeNotifier {
     var user = firebaseAuth.currentUser;
     if(user!=null){
       return true;
-    }else{
-      return false;
     }
+      return false;
   }
   void signOut(){
     var firebaseAuth = FirebaseAuth.instance;

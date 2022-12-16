@@ -1,14 +1,15 @@
 class YouTube {
-  List<dynamic>? videos;
+  List? video;
 
-  YouTube({this.videos});
+  YouTube({this.video});
 
   YouTube youTubeFactory(Map map) {
     return YouTube(
-      videos: map['videos'].map((e) => Videos().vFactory(e)).toList(),
+      video: map['video'].map((e) => Videos().vFactory(e)).toList(),
     );
   }
 }
+
 class Videos {
   String? id, chanelId, title;
   int? categoryId,
@@ -17,6 +18,7 @@ class Videos {
       dislikeCount,
       favoriteCount,
       commentCount;
+
   Videos(
       {this.id,
       this.chanelId,
