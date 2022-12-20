@@ -49,8 +49,14 @@ class _Register_PageState extends State<Register_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var res = await hprovider.createuser(e1.text, p1.text);
-                  if (res == "Success") {
+                  var re = await hprovider.createuser(e1.text, p1.text);
+                  print(re);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("$re"),
+                    ),
+                  );
+                  if (re == "Success") {
                     Navigator.pushReplacementNamed(context, 'home');
                     hprovider.cheakUser();
                   }

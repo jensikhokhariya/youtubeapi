@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youtubeapi/screen/home/home_screen.dart';
 import 'package:youtubeapi/screen/provider/lrprovider.dart';
 
 class Login_Page extends StatefulWidget {
@@ -13,7 +16,30 @@ class _Login_PageState extends State<Login_Page> {
   TextEditingController p1 = TextEditingController();
   LProvider hprovider = LProvider();
   bool login = false;
-
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   ischeck();
+  // }
+  // void ischeck(){
+  //   Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => login ? Login_Page() : Home_Page()),);
+  // }
+//
+//     @override
+//   void initState() {
+//     super.initState();
+//     login =hprovider.cheakUser();
+//   }
+//   @override
+//   void didChangeDependencies() {
+//     super.didChangeDependencies();
+//   }
+//
+// void isLogin(){
+//     if(login){
+//       Navigator.pushReplacementNamed(context, 'home');
+//     }
+// }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -58,7 +84,10 @@ class _Login_PageState extends State<Login_Page> {
                     ),
                   );
                   if (re == "Success") {
+                    // login ? null : () => Home_Page();
+                    // authProvider.isAuthenticated ?  HomeScreen() : LoginScreen();
                     Navigator.pushReplacementNamed(context, 'home');
+                    // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => login ? Login_Page() : Home_Page()),);
                     hprovider.cheakUser();
                   }
                 },

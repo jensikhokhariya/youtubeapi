@@ -8,7 +8,8 @@ class YoutubeData {
     Uri uri = Uri.parse(link);
     var res = await http.get(uri);
     var v1 = jsonDecode(res.body);
-    print("object : $v1");
-    return YouTube().youTubeFactory(v1);
+    print("object : ${jsonEncode(v1)}");
+    return YouTube.fromJson(v1);
   }
 }
+// AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtubeapi/screen/home/login_screen.dart';
 import 'package:youtubeapi/screen/provider/h_class.dart';
 import 'package:youtubeapi/screen/provider/homeprovider.dart';
 import '../provider/lrprovider.dart';
@@ -47,7 +48,7 @@ class _Home_PageState extends State<Home_Page> {
                 leading: IconButton(
                   onPressed: () {
                     hprovider.signOut();
-                    Navigator.pushReplacementNamed(context, '/');
+                     Navigator.pushReplacementNamed(context, '/');
                   },
                   icon: Icon(
                     Icons.logout_rounded,
@@ -88,32 +89,32 @@ class _Home_PageState extends State<Home_Page> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("${l1.video![index].chanelId}"),
+                                        Text(
+                                            "${l1.video![index].snippet!.channelId}"),
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Text("${l1.video![index].categoryId}"),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text("${l1.video![index].title}"),
+                                        Text(
+                                            "${l1.video![index].snippet!.title}"),
                                         SizedBox(
                                           height: 5,
                                         ),
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                                "${l1.video![index].viewCount}"),
+                                                "${l1.video![index].statistics!.viewCount}"),
                                             Text(
-                                                "${l1.video![index].likeCount}"),
+                                                "${l1.video![index].statistics!.likeCount}"),
                                             Text(
-                                                "${l1.video![index].dislikeCount}"),
+                                                "${l1.video![index].snippet!.categoryId}"),
+                                            // Text(
+                                            //     "${l1.video![index].statistics!.dislikeCount}"),
                                             Text(
-                                                "${l1.video![index].favoriteCount}"),
+                                                "${l1.video![index].statistics!.favoriteCount}"),
                                             Text(
-                                                "${l1.video![index].commentCount}"),
+                                                "${l1.video![index].statistics!.commentCount}"),
                                           ],
                                         ),
                                       ],
