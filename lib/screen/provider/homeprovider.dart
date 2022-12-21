@@ -74,21 +74,18 @@ class Statistics {
     this.likeCount,
     this.favoriteCount,
     this.commentCount,
-    // this.dislikeCount,
   });
 
   String? viewCount;
   String? likeCount;
   String? favoriteCount;
   String? commentCount;
-  // String? dislikeCount;
 
   factory Statistics.fromJson(Map<String, dynamic> json) => Statistics(
     viewCount: json["viewCount"],
     likeCount: json["likeCount"],
     favoriteCount: json["favoriteCount"],
     commentCount: json["commentCount"],
-      // dislikeCount: json["dislikeCount"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -96,6 +93,5 @@ class Statistics {
     "likeCount": likeCount,
     "favoriteCount": favoriteCount,
     "commentCount": commentCount,
-    // "dislikeCount":dislikeCount,
   };
 }
