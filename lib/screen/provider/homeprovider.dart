@@ -8,13 +8,11 @@ class YouTube {
   YouTube({
     this.video,
   });
-
   List<Item>? video;
 
   factory YouTube.fromJson(Map<String, dynamic> json) => YouTube(
     video: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
   );
-
   Map<String, dynamic> toJson() => {
     "items": List<dynamic>.from(video!.map((x) => x.toJson())),
   };
@@ -42,6 +40,7 @@ class Item {
     "snippet": snippet!.toJson(),
     "statistics": statistics!.toJson(),
   };
+
 }
 
 class Snippet {

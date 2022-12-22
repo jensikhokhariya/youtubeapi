@@ -17,7 +17,6 @@ void main()async {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: 'home',
         routes: {
           '/':(context)=> Login_Page(),
           'res':(context)=> Register_Page(),

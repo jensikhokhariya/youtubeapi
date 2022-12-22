@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youtubeapi/screen/home/home_screen.dart';
 import 'package:youtubeapi/screen/provider/lrprovider.dart';
 
 class Login_Page extends StatefulWidget {
@@ -12,29 +14,33 @@ class _Login_PageState extends State<Login_Page> {
   TextEditingController e1 = TextEditingController();
   TextEditingController p1 = TextEditingController();
   LProvider hprovider = LProvider();
-  bool login = false;
+  SharedPreferences? logindata;
+  bool? newuser;
   @override
   void initState() {
     super.initState();
-    login = hprovider.cheakUser();
+    check_if_already_login();
   }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  void isLogin(){
-    if(login){
-      Navigator.pushReplacementNamed(context, login? 'home':'/');
+  void check_if_already_login() async {
+    logindata = await SharedPreferences.getInstance();
+    newuser = (logindata?.getBool('login') ?? true);
+    print(newuser);
+    if (newuser == false) {
+      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Home_Page()));
     }
   }
-
+  @override
+  void dispose() {
+    e1.dispose();
+    p1.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.red,
           title: Text("Login"),
           centerTitle: true,
         ),
@@ -66,19 +72,17 @@ class _Login_PageState extends State<Login_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var re = await hprovider.createuser(e1.text, p1.text);
-                  print(re);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("$re"),
-                    ),
-                  );
-                  if (re == "Success") {
-                     Navigator.pushReplacementNamed(context,'home');
-                    hprovider.cheakUser();
+                  String username = e1.text;
+                  String password = p1.text;
+                  if (username != '' && password != '') {
+                    print('Successfull');
+                    logindata?.setBool('login', false);
+                    logindata?.setString('username', username);
+                    Navigator.pushNamed(context, '/');
                   }
                 },
                 child: Text("Log in"),
+                style: ElevatedButton.styleFrom(primary: Colors.red),
               ),
               SizedBox(
                 height: 20,
@@ -93,7 +97,7 @@ class _Login_PageState extends State<Login_Page> {
                 onPressed: () {
                   Navigator.pushNamed(context, 'res');
                 },
-                child: Text("create account | Sign in"),
+                child: Text("create account | Sign in",style: TextStyle(color: Colors.red),),
               ),
             ],
           ),

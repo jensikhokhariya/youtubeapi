@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youtubeapi/screen/home/login_screen.dart';
 import 'package:youtubeapi/screen/provider/lrprovider.dart';
 
 class Home_Page extends StatefulWidget {
@@ -15,10 +17,18 @@ class _Home_PageState extends State<Home_Page> {
   InAppWebViewController? inAppWebViewController;
   double progress = 0;
   LProvider hprovider = LProvider();
-
+  SharedPreferences? logindata;
+  String? username;
   @override
   void initState() {
     super.initState();
+    initial();
+  }
+  void initial() async {
+    logindata = await SharedPreferences.getInstance();
+    setState(() {
+      username = logindata?.getString('username');
+    });
   }
 
   @override
@@ -27,60 +37,78 @@ class _Home_PageState extends State<Home_Page> {
       child: Scaffold(
         body: Column(
           children: [
-            ListTile(
-              leading: Container(
-                width: 100,
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        if (inAppWebViewController != null) {
-                          inAppWebViewController!.goBack();
-                        }
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        if (inAppWebViewController != null) {
-                          inAppWebViewController!.reload();
-                        }
-                      },
-                      icon: Icon(
-                        Icons.refresh,
-                        size: 30,
-                      ),
-                    ),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.red.shade300,
+                    Colors.red.shade600,
+                    Colors.red.shade800,
+                    // Colors.black87,
+                    // Colors.black
                   ],
                 ),
               ),
-              title: TextField(
-                controller: texturl,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
+              child: ListTile(
+                leading: Container(
+                  width: 100,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          if (inAppWebViewController != null) {
+                            inAppWebViewController!.goBack();
+                          }
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          if (inAppWebViewController != null) {
+                            inAppWebViewController!.reload();
+                          }
+                        },
+                        icon: Icon(
+                          Icons.refresh,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              trailing: Container(
-                width: 100,
-                child: Row(
-                  children: [
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        hprovider.signOut();
-                        Navigator.pushReplacementNamed(context, '/');
-                      },
-                      icon: Icon(
-                        Icons.logout_rounded,
-                        size: 30,
-                      ),
+                title: TextField(
+                  controller: texturl,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
                     ),
-                  ],
+                  ),
+                ),
+                trailing: Container(
+                  width: 100,
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          logindata?.setBool('login', true);
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login_Page()));
+                        },
+                        icon: Icon(
+                          Icons.logout_rounded,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -88,6 +116,7 @@ class _Home_PageState extends State<Home_Page> {
               child: InAppWebView(
                 initialUrlRequest: URLRequest(
                   url: Uri.parse(url),
+
                 ),
                 initialOptions: InAppWebViewGroupOptions(
                   crossPlatform: InAppWebViewOptions(javaScriptEnabled: true),
@@ -95,6 +124,7 @@ class _Home_PageState extends State<Home_Page> {
                 onWebViewCreated: (controller){
                   setState((){
                     inAppWebViewController = controller;
+                    // return PermissionRequestResponse(action: PermissionRequestResponseAction.GRANT);
                   });
                 },
                 onLoadStart: (controller,url){
@@ -127,19 +157,10 @@ class _Home_PageState extends State<Home_Page> {
 
 
 
-
-
-
-
-
-
-
 // import 'package:flutter/material.dart';
 // import 'package:youtubeapi/screen/provider/h_class.dart';
 // import 'package:youtubeapi/screen/provider/homeprovider.dart';
 // import '../provider/lrprovider.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
-//
 // class Home_Page extends StatefulWidget {
 //   const Home_Page({Key? key}) : super(key: key);
 //
@@ -151,7 +172,20 @@ class _Home_PageState extends State<Home_Page> {
 //   LProvider hprovider = LProvider();
 //   String data = "";
 //   bool login = false;
-//   WebViewWidget? webViewWidget;
+//   // List<dynamic> l4 =[];
+//
+//   // User? user;
+//   // @override
+//   // void initState(){
+//   //   super.initState();
+//   //   Apicall();
+//   // }
+//   // void Apicall()async{
+//   //   List<dynamic> l1 = await YoutubeData().getData() as List;
+//   //   setState(() {
+//   //     l4 = l1;
+//   //   });
+//   // }
 //
 //   @override
 //   Widget build(BuildContext context) {
@@ -179,7 +213,7 @@ class _Home_PageState extends State<Home_Page> {
 //             children: [
 //               Expanded(
 //                 child: FutureBuilder<YouTube>(
-//                     future: YoutubeData().getData(data),
+//                     future: YoutubeData().getData(),
 //                     builder: (context, AsyncSnapshot snapshot) {
 //                       if (snapshot.hasError) {
 //                         return Center(child: Text("${snapshot.error}"));
@@ -198,12 +232,11 @@ class _Home_PageState extends State<Home_Page> {
 //                                           CrossAxisAlignment.start,
 //                                       children: [
 //                                         Text("${l1.video![index].id}"),
-//                                         //https://www.googleapis.com/youtube/v3/
 //                                         SizedBox(
 //                                           height: 5,
 //                                         ),
 //                                         Text(
-//                                             "${l1.video![index].snippet!.channelId}"),
+//                                              "${l1.video![index].snippet!.channelId}"),
 //                                         SizedBox(
 //                                           height: 5,
 //                                         ),
@@ -247,4 +280,4 @@ class _Home_PageState extends State<Home_Page> {
 //     );
 //   }
 // }
-// // child: login == false ? Login_Page() : Home_Page(),
+// child: login == false ? Login_Page() : Home_Page(),
