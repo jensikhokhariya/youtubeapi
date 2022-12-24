@@ -13,7 +13,6 @@ class Home_Page extends StatefulWidget {
 }
 
 class _Home_PageState extends State<Home_Page> {
-  String? id;
   LProvider hprovider = LProvider();
   String data = "";
   bool login = false;
@@ -40,6 +39,7 @@ class _Home_PageState extends State<Home_Page> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
+          title: Text("YouTube"),
           actions: [
             IconButton(
               onPressed: () {
@@ -95,18 +95,36 @@ class _Home_PageState extends State<Home_Page> {
                                       ),
                                       ListTile(
                                         leading: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 40,
+                                          width: 40,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(20),
+                                            borderRadius:
+                                                BorderRadius.circular(20),
                                           ),
                                           child: Image.network(
-                                              "${l1.items![index].snippet!.thumbnails!.medium}"),
+                                              "${l1.items![index].snippet!.thumbnails}"),
                                         ),
-                                        title: Text(
-                                          "${l1.items![index].snippet!.title}",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.normal),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "${l1.items![index].snippet!.channelTitle}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                  color: Colors.black),
+                                            ),
+                                            Text(
+                                              "${l1.items![index].snippet!.title}",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 10,
+                                                  color: Colors.black87),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

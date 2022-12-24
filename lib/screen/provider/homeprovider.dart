@@ -7,9 +7,9 @@ String welcomeToJson(Youtube data) => json.encode(data.toJson());
 class Youtube {
   Youtube({
     this.kind,
- this.etag,
+    this.etag,
     this.items,
-     this.pageInfo,
+    this.pageInfo,
   });
 
   String? kind;

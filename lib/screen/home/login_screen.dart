@@ -72,17 +72,25 @@ class _Login_PageState extends State<Login_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  var res =
+                  await hprovider.createuser(e1.text, p1.text);
+                  print(res);
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("$res")));
+                  if (res == "Success") {
+                    Navigator.pushReplacementNamed(context, 'home');
+                  }
                   String username = e1.text;
                   String password = p1.text;
-                  if (username != '' && password != '') {
+                  if(username != '' && password != ''){
                     print('Successfull');
                     logindata?.setBool('login', false);
                     logindata?.setString('username', username);
                     Navigator.pushNamed(context, '/');
                   }
                 },
-                child: Text("Log in"),
-                style: ElevatedButton.styleFrom(primary: Colors.red),
+                child: Text("Login"),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               ),
               SizedBox(
                 height: 20,

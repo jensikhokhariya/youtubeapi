@@ -4,7 +4,8 @@ import 'package:youtubeapi/screen/provider/homeprovider.dart';
 
 class YoutubeData {
   Future<Youtube> getData() async {
-    String link = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
+    String link =
+        "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
     Uri uri = Uri.parse(link);
     var res = await http.get(uri);
     var v1 = jsonDecode(res.body);

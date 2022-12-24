@@ -31,8 +31,8 @@ class _BottemState extends State<Bottem> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: "Search",
+                icon: Icon(Icons.sentiment_satisfied),
+                label: "Smile",
               ),
             ],
             currentIndex: select,
