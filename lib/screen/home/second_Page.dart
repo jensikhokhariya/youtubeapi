@@ -25,6 +25,7 @@ class _Second_PageState extends State<Second_Page> {
           ),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               height: 200,
@@ -33,6 +34,32 @@ class _Second_PageState extends State<Second_Page> {
               child: YoutubePlayer(
                 controller: YoutubePlayerController(initialVideoId: "${y1.id}"),
               ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: y1.snippet!.channelId!.length,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 100,
+                            width: 150,
+                            padding: EdgeInsets.all(10),
+                            child: YoutubePlayer(
+                              controller: YoutubePlayerController(
+                                  initialVideoId:
+                                      "${y1.snippet!.channelId![index]}"),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Text("${y1.snippet!.title}"),
+                        ),
+                      ],
+                    );
+                  }),
             ),
           ],
         ),

@@ -74,51 +74,51 @@ class _Home_PageState extends State<Home_Page> {
                                 itemBuilder: (context, index) {
                                   return Column(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
                                         onTap: () {
                                           Navigator.pushReplacementNamed(
                                               context, 'second',
-                                              arguments: l1.items![index]);
+                                              arguments: l1.items![index],
+                                              result: l1.items);
                                         },
-                                        child: Container(
-                                          height: 200,
-                                          width: 500,
-                                          margin: EdgeInsets.all(5),
-                                          child: YoutubePlayer(
-                                            controller: YoutubePlayerController(
-                                                initialVideoId:
-                                                    "${l1.items![index].id}"),
-                                          ),
+                                        child: YoutubePlayer(
+                                          controller: YoutubePlayerController(
+                                              initialVideoId:
+                                              "${l1.items![index].id}"),
                                         ),
                                       ),
                                       ListTile(
                                         leading: Container(
-                                          height: 40,
-                                          width: 40,
+                                          height: 50,
+                                          width: 50,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                                BorderRadius.circular(20),
+                                            BorderRadius.circular(20),
                                           ),
                                           child: Image.network(
-                                              "${l1.items![index].snippet!.thumbnails}"),
+                                              "${l1.items![index].snippet!
+                                                  .thumbnails!
+                                                  .thumbnailsDefault!.url}"),
                                         ),
                                         subtitle: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "${l1.items![index].snippet!.channelTitle}",
+                                              "${l1.items![index].snippet!
+                                                  .channelTitle}",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 15,
                                                   color: Colors.black),
                                             ),
                                             Text(
-                                              "${l1.items![index].snippet!.title}",
+                                              "${l1.items![index].snippet!
+                                                  .title}",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.normal,
                                                   fontSize: 10,
