@@ -23,6 +23,14 @@ class _Second_PageState extends State<Second_Page> {
             },
             icon: Icon(Icons.arrow_back),
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, 'third');
+              },
+              icon: Icon(Icons.arrow_forward_outlined),
+            ),
+          ],
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,19 +48,26 @@ class _Second_PageState extends State<Second_Page> {
                   itemCount: y1.snippet!.channelId!.length,
                   itemBuilder: (context, index) {
                     return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: 100,
-                            width: 150,
-                            padding: EdgeInsets.all(10),
+                        Container(
+                          height: 100,
+                          width: 150,
+                          padding: EdgeInsets.all(10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, 'third',
+                                  arguments: y1.snippet!.channelId![index]);
+                            },
                             child: YoutubePlayer(
                               controller: YoutubePlayerController(
                                   initialVideoId:
                                       "${y1.snippet!.channelId![index]}"),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Expanded(
                           child: Text("${y1.snippet!.title}"),

@@ -7,6 +7,7 @@ import 'package:youtubeapi/screen/home/home_screen.dart';
 import 'package:youtubeapi/screen/home/Register_screen.dart';
 import 'package:youtubeapi/screen/home/login_screen.dart';
 import 'package:youtubeapi/screen/home/second_Page.dart';
+import 'package:youtubeapi/screen/home/thirdpage.dart';
 import 'package:youtubeapi/screen/provider/lrprovider.dart';
 
 void main()async {
@@ -25,6 +26,7 @@ void main()async {
           'res':(context)=> Register_Page(),
           'home':(context)=> Home_Page(),
           'second':(context)=> Second_Page(),
+          'third':(context)=> Third_Page(),
           'bottem':(context)=>Bottem(),
         },
       ),

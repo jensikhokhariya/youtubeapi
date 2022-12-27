@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtubeapi/screen/home/home_screen.dart';
-import 'package:youtubeapi/screen/home/second_Page.dart';
+import 'package:youtubeapi/screen/home/thirdpage.dart';
 
 class Bottem extends StatefulWidget {
   const Bottem({Key? key}) : super(key: key);
@@ -13,13 +13,14 @@ class _BottemState extends State<Bottem> {
   int select = 0;
   List sel = [
     Home_Page(),
-    Second_Page(),
+    Third_Page(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        body: sel[select],
         bottomNavigationBar: Container(
           height: 60,
           width: double.infinity,
@@ -31,8 +32,8 @@ class _BottemState extends State<Bottem> {
                 label: "Home",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.sentiment_satisfied),
-                label: "Smile",
+                icon: Icon(Icons.video_library),
+                label: "Videos",
               ),
             ],
             currentIndex: select,
@@ -43,7 +44,6 @@ class _BottemState extends State<Bottem> {
             elevation: 5,
           ),
         ),
-        body: sel[select],
       ),
     );
   }

@@ -80,8 +80,7 @@ class _Home_PageState extends State<Home_Page> {
                                         onTap: () {
                                           Navigator.pushReplacementNamed(
                                               context, 'second',
-                                              arguments: l1.items![index],
-                                              result: l1.items);
+                                              arguments: l1.items![index]);
                                         },
                                         child: YoutubePlayer(
                                           controller: YoutubePlayerController(
