@@ -43,6 +43,50 @@ class _Second_PageState extends State<Second_Page> {
                 controller: YoutubePlayerController(initialVideoId: "${y1.id}"),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Icon(
+                      Icons.thumb_up,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text("${y1.statistics!.likeCount}"),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.bookmark,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text("${y1.statistics!.favoriteCount}"),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.comment,
+                      color: Colors.blue,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text("${y1.statistics!.commentCount}"),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: ListView.builder(
                   itemCount: y1.snippet!.channelId!.length,
@@ -54,28 +98,49 @@ class _Second_PageState extends State<Second_Page> {
                           height: 100,
                           width: 150,
                           padding: EdgeInsets.all(10),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacementNamed(context, 'third',
-                                  arguments: y1.snippet!.channelId![index]);
-                            },
-                            child: YoutubePlayer(
-                              controller: YoutubePlayerController(
-                                  initialVideoId:
-                                      "${y1.snippet!.channelId![index]}"),
-                            ),
+                          child: YoutubePlayer(
+                            controller: YoutubePlayerController(
+                                initialVideoId:
+                                    "${y1.snippet!.channelId![index]}"),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: Text("${y1.snippet!.title}"),
                         ),
                       ],
                     );
                   }),
             ),
+            // Expanded(
+            //   child: ListView.builder(
+            //       itemCount: y1.snippet!.channelId!.length,
+            //       itemBuilder: (context, index) {
+            //         return Row(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             Container(
+            //               height: 100,
+            //               width: 150,
+            //               padding: EdgeInsets.all(10),
+            //               child: GestureDetector(
+            //                 onTap: () {
+            //                   Navigator.pushReplacementNamed(context, 'third',
+            //                       arguments: y1.snippet!.channelId![index]);
+            //                 },
+            //                 child: YoutubePlayer(
+            //                   controller: YoutubePlayerController(
+            //                       initialVideoId:
+            //                           "${y1.snippet!.channelId![index]}"),
+            //                 ),
+            //               ),
+            //             ),
+            //             SizedBox(
+            //               height: 10,
+            //             ),
+            //             Expanded(
+            //               child: Text("${y1.snippet!.title}"),
+            //             ),
+            //           ],
+            //         );
+            //       }),
+            // ),
           ],
         ),
       ),

@@ -56,6 +56,7 @@ class _Home_PageState extends State<Home_Page> {
         body: Container(
           height: double.infinity,
           width: double.infinity,
+          margin: EdgeInsets.all(10),
           child: Column(
             children: [
               Expanded(
@@ -75,6 +76,7 @@ class _Home_PageState extends State<Home_Page> {
                                   return Column(
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
                                       GestureDetector(
                                         onTap: () {
