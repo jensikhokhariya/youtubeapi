@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtubeapi/screen/home/bottempage.dart';
+import 'package:youtubeapi/screen/home/fourthpage.dart';
 import 'package:youtubeapi/screen/home/home_screen.dart';
 import 'package:youtubeapi/screen/home/Register_screen.dart';
 import 'package:youtubeapi/screen/home/login_screen.dart';
@@ -27,6 +28,7 @@ void main()async {
           'home':(context)=> Home_Page(),
           'second':(context)=> Second_Page(),
           'third':(context)=> Third_Page(),
+          'fourth':(context)=>Fourth_Page(),
           'bottem':(context)=>Bottem(),
         },
       ),

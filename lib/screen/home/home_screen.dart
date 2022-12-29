@@ -18,7 +18,6 @@ class _Home_PageState extends State<Home_Page> {
   bool login = false;
   SharedPreferences? logindata;
   String? username;
-  int select = 0;
 
   @override
   void initState() {
@@ -68,6 +67,7 @@ class _Home_PageState extends State<Home_Page> {
                       } else if (snapshot.hasData) {
                         Youtube l1 = snapshot.data;
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
                               child: ListView.builder(
@@ -90,18 +90,14 @@ class _Home_PageState extends State<Home_Page> {
                                               "${l1.items![index].id}"),
                                         ),
                                       ),
+                                      SizedBox(height: 10,),
                                       ListTile(
                                         leading: Container(
                                           height: 50,
                                           width: 50,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius.circular(20),
+                                          child: CircleAvatar(
+                                            backgroundImage: NetworkImage("${l1.items![index].snippet!.thumbnails!.thumbnailsDefault!.url}"),
                                           ),
-                                          child: Image.network(
-                                              "${l1.items![index].snippet!
-                                                  .thumbnails!
-                                                  .thumbnailsDefault!.url}"),
                                         ),
                                         subtitle: Column(
                                           crossAxisAlignment:
@@ -128,6 +124,7 @@ class _Home_PageState extends State<Home_Page> {
                                           ],
                                         ),
                                       ),
+                                      SizedBox(height: 10,),
                                     ],
                                   );
                                 },

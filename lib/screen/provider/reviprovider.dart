@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Youtube1 welcomeFromJson(String str) => Youtube1.fromJson(json.decode(str));
+Related welcomeFromJson(String str) => Related.fromJson(json.decode(str));
 
-String welcomeToJson(Youtube1 data) => json.encode(data.toJson());
+String welcomeToJson(Related data) => json.encode(data.toJson());
 
-class Youtube1 {
-  Youtube1({
+class Related {
+  Related({
     this.kind,
     this.etag,
     this.items,
@@ -13,12 +13,12 @@ class Youtube1 {
 
   String? kind;
   String? etag;
-  List<Item>? items;
+  List<Items>? items;
 
-  factory Youtube1.fromJson(Map<String, dynamic> json) => Youtube1(
+  factory Related.fromJson(Map<String, dynamic> json) => Related(
     kind: json["kind"],
     etag: json["etag"],
-    items: List<Item>.from(json["items"].map((x) => Item.fromJson(x))),
+    items: List<Items>.from(json["items"].map((x) => Items.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -28,28 +28,28 @@ class Youtube1 {
   };
 }
 
-class Item {
-  Item({
+class Items {
+  Items({
     this.kind,
     this.etag,
     this.id,
     this.snippet,
   });
 
-  String? kind;
+  ItemKind? kind;
   String? etag;
   Id? id;
   Snippet? snippet;
 
-  factory Item.fromJson(Map<String, dynamic> json) => Item(
-    kind: json["kind"],
+  factory Items.fromJson(Map<String, dynamic> json) => Items(
+    kind: itemKindValues.map![json["kind"]],
     etag: json["etag"],
     id: Id.fromJson(json["id"]),
     snippet: Snippet.fromJson(json["snippet"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "kind": kind,
+    "kind": itemKindValues.reverse![kind],
     "etag": etag,
     "id": id?.toJson(),
     "snippet": snippet?.toJson(),
@@ -62,19 +62,31 @@ class Id {
     this.videoId,
   });
 
-  String? kind;
+  IdKind? kind;
   String? videoId;
 
   factory Id.fromJson(Map<String, dynamic> json) => Id(
-    kind: json["kind"],
+    kind: idKindValues.map![json["kind"]],
     videoId: json["videoId"],
   );
 
   Map<String, dynamic> toJson() => {
-    "kind": kind,
+    "kind": idKindValues.reverse![kind],
     "videoId": videoId,
   };
 }
+
+enum IdKind { YOUTUBE_VIDEO }
+
+final idKindValues = EnumValues({
+  "youtube#video": IdKind.YOUTUBE_VIDEO
+});
+
+enum ItemKind { YOUTUBE_SEARCH_RESULT }
+
+final itemKindValues = EnumValues({
+  "youtube#searchResult": ItemKind.YOUTUBE_SEARCH_RESULT
+});
 
 class Snippet {
   Snippet({
@@ -94,7 +106,7 @@ class Snippet {
   String? description;
   Thumbnails? thumbnails;
   String? channelTitle;
-  String? liveBroadcastContent;
+  LiveBroadcastContent? liveBroadcastContent;
   DateTime? publishTime;
 
   factory Snippet.fromJson(Map<String, dynamic> json) => Snippet(
@@ -104,7 +116,7 @@ class Snippet {
     description: json["description"],
     thumbnails: Thumbnails.fromJson(json["thumbnails"]),
     channelTitle: json["channelTitle"],
-    liveBroadcastContent: json["liveBroadcastContent"],
+    liveBroadcastContent: liveBroadcastContentValues.map![json["liveBroadcastContent"]],
     publishTime: DateTime.parse(json["publishTime"]),
   );
 
@@ -115,10 +127,16 @@ class Snippet {
     "description": description,
     "thumbnails": thumbnails?.toJson(),
     "channelTitle": channelTitle,
-    "liveBroadcastContent": liveBroadcastContent,
+    "liveBroadcastContent": liveBroadcastContentValues.reverse![liveBroadcastContent],
     "publishTime": publishTime?.toIso8601String(),
   };
 }
+
+enum LiveBroadcastContent { NONE }
+
+final liveBroadcastContentValues = EnumValues({
+  "none": LiveBroadcastContent.NONE
+});
 
 class Thumbnails {
   Thumbnails({
@@ -139,7 +157,7 @@ class Thumbnails {
     thumbnailsDefault: Default.fromJson(json["default"]),
     medium: Default.fromJson(json["medium"]),
     high: Default.fromJson(json["high"]),
-    standard: Default.fromJson(json["standard"]),
+    standard: json["standard"] == null ? null : Default.fromJson(json["standard"]),
     maxres: json["maxres"] == null ? null : Default.fromJson(json["maxres"]),
   );
 
@@ -147,7 +165,7 @@ class Thumbnails {
     "default": thumbnailsDefault?.toJson(),
     "medium": medium?.toJson(),
     "high": high?.toJson(),
-    "standard": standard?.toJson(),
+    "standard": standard == null ? null : standard?.toJson(),
     "maxres": maxres == null ? null : maxres?.toJson(),
   };
 }
@@ -174,4 +192,18 @@ class Default {
     "width": width,
     "height": height,
   };
+}
+
+class EnumValues<T> {
+  Map<String, T>? map;
+  Map<T, String>? reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String>? get reverse {
+    if (reverseMap == null) {
+      reverseMap = map!.map((k, v) => new MapEntry(v, k));
+    }
+    return reverseMap;
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtubeapi/screen/provider/h1_class.dart';
-import 'package:youtubeapi/screen/provider/h1_provider.dart';
+import 'package:youtubeapi/screen/provider/relatedvideo.dart';
+import 'package:youtubeapi/screen/provider/reviprovider.dart';
 
 class Third_Page extends StatefulWidget {
   const Third_Page({Key? key}) : super(key: key);
@@ -26,50 +26,39 @@ class _Third_PageState extends State<Third_Page> {
           child: Column(
             children: [
               Expanded(
-                child: FutureBuilder<Youtube1>(
+                child: FutureBuilder<Related>(
                     future: YoutubeData1().getData1(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
                         return Center(child: Text("${snapshot.error}"));
                       } else if (snapshot.hasData) {
-                        Youtube1 l1 = snapshot.data;
+                        Related l1 = snapshot.data;
                         return Column(
                           children: [
                             Expanded(
                               child: ListView.builder(
                                 itemCount: l1.items!.length,
                                 itemBuilder: (context, index) {
-                                  return Column(
+                                  return Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            width: 150,
-                                            padding: EdgeInsets.all(10),
-                                            child: YoutubePlayer(
-                                              controller: YoutubePlayerController(
-                                                  initialVideoId:
-                                                      "${l1.items![index].id}"),
-                                            ),
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.pushReplacementNamed(context, 'fourth',arguments: l1.items![index]);
+                                        },
+                                        child: Container(
+                                          height: 100,
+                                          width: 150,
+                                          padding: EdgeInsets.all(10),
+                                          child: YoutubePlayer(
+                                            controller: YoutubePlayerController(
+                                                initialVideoId:
+                                                    "${l1.items![index].id!.videoId}"),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            width: 150,
-                                            padding: EdgeInsets.all(10),
-                                            child: YoutubePlayer(
-                                              controller: YoutubePlayerController(
-                                                  initialVideoId:
-                                                  "${l1.items![index].id}"),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      SizedBox(height: 5,),
+                                      Expanded(child: Text("${l1.items![index].snippet!.title}")),
                                     ],
                                   );
                                 },
