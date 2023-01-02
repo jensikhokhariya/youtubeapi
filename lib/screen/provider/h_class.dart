@@ -1,18 +1,18 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:youtubeapi/screen/provider/homeprovider.dart';
+TextEditingController s1 = TextEditingController();
 
 class YoutubeData {
   Future<Youtube> getData() async {
     String link =
-        "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=5&regionCode=IN&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
+        "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=5&q=${s1.text} &regionCode=IN&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
     Uri uri = Uri.parse(link);
     var res = await http.get(uri);
     var v1 = jsonDecode(res.body);
     print("object : ${jsonEncode(v1)}");
-
     return Youtube.fromJson(v1);
   }
 }
-
 //"https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM&fields=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics"

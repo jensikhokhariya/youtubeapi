@@ -20,8 +20,8 @@ class _Home_PageState extends State<Home_Page> {
   SharedPreferences? logindata;
   String? username;
 
-  String livedata = "";
-  List<Map<String, dynamic>> l2 = [];
+  // String livedata = "";
+  // List<Map<String, dynamic>> l2 = [];
 
   /*int select = 0;
   List sel = [
@@ -32,12 +32,12 @@ class _Home_PageState extends State<Home_Page> {
 
   // List<Youtube> _MyAllData = [];
   // var snippet = [];
-
+  bool isVisible=false;
   @override
   void initState() {
     super.initState();
     initial();
-     getData();
+     // getData();
   }
 
   void initial() async {
@@ -47,13 +47,13 @@ class _Home_PageState extends State<Home_Page> {
     });
   }
 
-   Future<List<Map<String, dynamic>>> getData({String? later}) async {
-    List<Map<String, dynamic>> l1 = await l2;
-    setState(() {
-      l2 = l1;
-    });
-    return l1;
-   }
+   // Future<List<Map<String, dynamic>>> getData({String? later}) async {
+   //  List<Map<String, dynamic>> l1 = await l2;
+   //  setState(() {
+   //    l2 = l1;
+   //  });
+   //  return l1;
+   // }
 
   @override
   Widget build(BuildContext context) {
@@ -136,9 +136,8 @@ class _Home_PageState extends State<Home_Page> {
                                   ),
                                   onChanged: (value) {
                                     setState(() {
-                                      livedata = value;
+                                      isVisible=true;
                                     });
-                                    search(livedata);
                                   },
                                 ),
                               ),
@@ -224,7 +223,7 @@ class _Home_PageState extends State<Home_Page> {
     );
   }
 
-// _searchbar() {
+/* _searchbar() {
 //   return Padding(
 //     padding: const EdgeInsets.all(8.0),
 //     child: TextField(
@@ -240,24 +239,25 @@ class _Home_PageState extends State<Home_Page> {
 //       },
 //     ),
 //   );
-// }
+ }*/
 
- void search(String later) async {
-    List<Map<String, dynamic>> data = await getData();
-    List<Map<String, dynamic>> filterdata = [];
+ // void search(String later) async {
+ //    List<Map<String, dynamic>> data = await getData();
+ //    List<Map<String, dynamic>> filterdata = [];
+ //
+ //    for (int i = 0; i < data.length; i++) {
+ //      if (data[i]['snippet']
+ //          .toString()
+ //          .toLowerCase()
+ //          .contains(later.toLowerCase())) {
+ //        filterdata.add(data[i]);
+ //        setState(() {
+ //          l2 = filterdata;
+ //        });
+ //      }
+ //    }
+ //   }
 
-    for (int i = 0; i < data.length; i++) {
-      if (data[i]['snippet']
-          .toString()
-          .toLowerCase()
-          .contains(later.toLowerCase())) {
-        filterdata.add(data[i]);
-        setState(() {
-          l2 = filterdata;
-        });
-      }
-    }
-   }
  /* void onitem(int index) {
     setState(() {
       select = index;
