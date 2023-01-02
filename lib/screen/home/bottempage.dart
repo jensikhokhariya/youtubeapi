@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtubeapi/screen/home/home_screen.dart';
+import 'package:youtubeapi/screen/home/subscribepage.dart';
 import 'package:youtubeapi/screen/home/thirdpage.dart';
 
 class Bottem extends StatefulWidget {
@@ -14,6 +15,7 @@ class _BottemState extends State<Bottem> {
   List sel = [
     Home_Page(),
     Third_Page(),
+    Subscribe_Page(),
   ];
 
   @override
@@ -34,6 +36,10 @@ class _BottemState extends State<Bottem> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.video_library),
                 label: "Videos",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.subscriptions_outlined),
+                label: "Subscribe",
               ),
             ],
             currentIndex: select,

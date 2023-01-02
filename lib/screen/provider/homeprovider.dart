@@ -46,7 +46,7 @@ class Item {
     this.statistics,
   });
 
-  Kind? kind;
+  String? kind;
   String? etag;
   String? id;
   Snippet? snippet;
@@ -54,7 +54,7 @@ class Item {
   Statistics? statistics;
 
   factory Item.fromJson(Map<String, dynamic> json) => Item(
-    kind: kindValues.map![json["kind"]],
+    kind: json["kind"],
     etag: json["etag"],
     id: json["id"],
     snippet: Snippet.fromJson(json["snippet"]),
@@ -63,7 +63,7 @@ class Item {
   );
 
   Map<String, dynamic> toJson() => {
-    "kind": kindValues.reverse![kind],
+    "kind": kind,
     "etag": etag,
     "id": id,
     "snippet": snippet?.toJson(),
@@ -81,38 +81,34 @@ class ContentDetails {
     this.licensedContent,
     this.contentRating,
     this.projection,
-    this.regionRestriction,
   });
 
   String? duration;
-  Dimension? dimension;
-  Definition? definition;
+  String? dimension;
+  String? definition;
   String? caption;
   bool? licensedContent;
   ContentRating? contentRating;
-  Projection? projection;
-  RegionRestriction? regionRestriction;
+  String? projection;
 
   factory ContentDetails.fromJson(Map<String, dynamic> json) => ContentDetails(
     duration: json["duration"],
-    dimension: dimensionValues.map![json["dimension"]],
-    definition: definitionValues.map![json["definition"]],
+    dimension: json["dimension"],
+    definition: json["definition"],
     caption: json["caption"],
     licensedContent: json["licensedContent"],
     contentRating: ContentRating.fromJson(json["contentRating"]),
-    projection: projectionValues.map![json["projection"]],
-    regionRestriction: json["regionRestriction"] == null ? null : RegionRestriction.fromJson(json["regionRestriction"]),
+    projection: json["projection"],
   );
 
   Map<String, dynamic> toJson() => {
     "duration": duration,
-    "dimension": dimensionValues.reverse![dimension],
-    "definition": definitionValues.reverse![definition],
+    "dimension": dimension,
+    "definition": definition,
     "caption": caption,
     "licensedContent": licensedContent,
     "contentRating": contentRating?.toJson(),
-    "projection": projectionValues.reverse![projection],
-    "regionRestriction": regionRestriction == null ? null : regionRestriction?.toJson(),
+    "projection": projection,
   };
 }
 
@@ -126,50 +122,6 @@ class ContentRating {
   };
 }
 
-enum Definition { HD }
-
-final definitionValues = EnumValues({
-  "hd": Definition.HD
-});
-
-enum Dimension { THE_2_D }
-
-final dimensionValues = EnumValues({
-  "2d": Dimension.THE_2_D
-});
-
-enum Projection { RECTANGULAR }
-
-final projectionValues = EnumValues({
-  "rectangular": Projection.RECTANGULAR
-});
-
-class RegionRestriction {
-  RegionRestriction({
-    this.blocked,
-    this.allowed,
-  });
-
-  List<String>? blocked;
-  List<String>? allowed;
-
-  factory RegionRestriction.fromJson(Map<String, dynamic> json) => RegionRestriction(
-    blocked: json["blocked"] == null ? null : List<String>.from(json["blocked"].map((x) => x)),
-    allowed: json["allowed"] == null ? null : List<String>.from(json["allowed"].map((x) => x)),
-  );
-
-  Map<String, dynamic> toJson() => {
-    "blocked": blocked == null ? null : List<dynamic>.from(blocked!.map((x) => x)),
-    "allowed": allowed == null ? null : List<dynamic>.from(allowed!.map((x) => x)),
-  };
-}
-
-enum Kind { YOUTUBE_VIDEO }
-
-final kindValues = EnumValues({
-  "youtube#video": Kind.YOUTUBE_VIDEO
-});
-
 class Snippet {
   Snippet({
     this.publishedAt,
@@ -182,7 +134,6 @@ class Snippet {
     this.categoryId,
     this.liveBroadcastContent,
     this.localized,
-    this.defaultLanguage,
     this.defaultAudioLanguage,
   });
 
@@ -194,9 +145,8 @@ class Snippet {
   String? channelTitle;
   List<String>? tags;
   String? categoryId;
-  LiveBroadcastContent? liveBroadcastContent;
+  String? liveBroadcastContent;
   Localized? localized;
-  String? defaultLanguage;
   String? defaultAudioLanguage;
 
   factory Snippet.fromJson(Map<String, dynamic> json) => Snippet(
@@ -208,9 +158,8 @@ class Snippet {
     channelTitle: json["channelTitle"],
     tags: json["tags"] == null ? null : List<String>.from(json["tags"].map((x) => x)),
     categoryId: json["categoryId"],
-    liveBroadcastContent: liveBroadcastContentValues.map![json["liveBroadcastContent"]],
+    liveBroadcastContent: json["liveBroadcastContent"],
     localized: Localized.fromJson(json["localized"]),
-    defaultLanguage: json["defaultLanguage"] == null ? null : json["defaultLanguage"],
     defaultAudioLanguage: json["defaultAudioLanguage"] == null ? null : json["defaultAudioLanguage"],
   );
 
@@ -223,18 +172,11 @@ class Snippet {
     "channelTitle": channelTitle,
     "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
     "categoryId": categoryId,
-    "liveBroadcastContent": liveBroadcastContentValues.reverse![liveBroadcastContent],
+    "liveBroadcastContent": liveBroadcastContent,
     "localized": localized?.toJson(),
-    "defaultLanguage": defaultLanguage == null ? null : defaultLanguage,
     "defaultAudioLanguage": defaultAudioLanguage == null ? null : defaultAudioLanguage,
   };
 }
-
-enum LiveBroadcastContent { NONE }
-
-final liveBroadcastContentValues = EnumValues({
-  "none": LiveBroadcastContent.NONE
-});
 
 class Localized {
   Localized({
@@ -276,7 +218,7 @@ class Thumbnails {
     medium: Default.fromJson(json["medium"]),
     high: Default.fromJson(json["high"]),
     standard: Default.fromJson(json["standard"]),
-    maxres: json["maxres"] == null ? null : Default.fromJson(json["maxres"]),
+    maxres: Default.fromJson(json["maxres"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -284,7 +226,7 @@ class Thumbnails {
     "medium": medium?.toJson(),
     "high": high?.toJson(),
     "standard": standard?.toJson(),
-    "maxres": maxres == null ? null : maxres?.toJson(),
+    "maxres": maxres?.toJson(),
   };
 }
 
@@ -329,14 +271,14 @@ class Statistics {
     viewCount: json["viewCount"],
     likeCount: json["likeCount"],
     favoriteCount: json["favoriteCount"],
-    commentCount: json["commentCount"] == null ? null : json["commentCount"],
+    commentCount: json["commentCount"],
   );
 
   Map<String, dynamic> toJson() => {
     "viewCount": viewCount,
     "likeCount": likeCount,
     "favoriteCount": favoriteCount,
-    "commentCount": commentCount == null ? null : commentCount,
+    "commentCount": commentCount,
   };
 }
 
@@ -358,18 +300,4 @@ class PageInfo {
     "totalResults": totalResults,
     "resultsPerPage": resultsPerPage,
   };
-}
-
-class EnumValues<T> {
-  Map<String, T>? map;
-  Map<T, String>? reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String>? get reverse {
-    if (reverseMap == null) {
-      reverseMap = map!.map((k, v) => new MapEntry(v, k));
-    }
-    return reverseMap;
-  }
 }

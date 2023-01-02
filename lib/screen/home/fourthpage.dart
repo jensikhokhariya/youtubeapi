@@ -32,25 +32,49 @@ class _Fourth_PageState extends State<Fourth_Page> {
               width: 500,
               padding: EdgeInsets.all(10),
               child: YoutubePlayer(
-                controller: YoutubePlayerController(initialVideoId: "${t1.id!.videoId}"),
+                controller: YoutubePlayerController(
+                    initialVideoId: "${t1.id!.videoId}"),
               ),
             ),
-           SizedBox(height: 10,),
-            Text("${t1.snippet!.title}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "${t1.snippet!.title}",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               children: [
                 Container(
                   height: 50,
                   width: 50,
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage("${t1.snippet!.thumbnails!.thumbnailsDefault!.url}"),
+                    backgroundImage: NetworkImage(
+                        "${t1.snippet!.thumbnails!.thumbnailsDefault!.url}"),
                   ),
                 ),
-                SizedBox(width: 10,),
-                Text("${t1.snippet!.channelTitle}",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 19),),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "${t1.snippet!.channelTitle}",
+                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 19),
+                ),
               ],
             ),
+            SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+                  child: Text(
+              "${t1.snippet!.description}",
+              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+            ),
+                )),
           ],
         ),
       ),

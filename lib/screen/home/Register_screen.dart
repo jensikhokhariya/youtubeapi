@@ -13,6 +13,7 @@ class _Register_PageState extends State<Register_Page> {
   TextEditingController p1 = TextEditingController();
   LProvider hprovider = LProvider();
   bool login = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(

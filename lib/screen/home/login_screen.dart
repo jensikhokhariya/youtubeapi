@@ -16,25 +16,30 @@ class _Login_PageState extends State<Login_Page> {
   LProvider hprovider = LProvider();
   SharedPreferences? logindata;
   bool? newuser;
+
   @override
   void initState() {
     super.initState();
     check_if_already_login();
   }
+
   void check_if_already_login() async {
     logindata = await SharedPreferences.getInstance();
     newuser = (logindata?.getBool('login') ?? true);
     print(newuser);
     if (newuser == false) {
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Home_Page()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Home_Page()));
     }
   }
+
   @override
   void dispose() {
     e1.dispose();
     p1.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,8 +77,7 @@ class _Login_PageState extends State<Login_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var res =
-                  await hprovider.createuser(e1.text, p1.text);
+                  var res = await hprovider.createuser(e1.text, p1.text);
                   print(res);
                   ScaffoldMessenger.of(context)
                       .showSnackBar(SnackBar(content: Text("$res")));
@@ -82,7 +86,7 @@ class _Login_PageState extends State<Login_Page> {
                   }
                   String username = e1.text;
                   String password = p1.text;
-                  if(username != '' && password != ''){
+                  if (username != '' && password != '') {
                     print('Successfull');
                     logindata?.setBool('login', false);
                     logindata?.setString('username', username);
@@ -100,12 +104,15 @@ class _Login_PageState extends State<Login_Page> {
                   hprovider.googleSignIn();
                 },
                 child: Image.asset("assets/images/google.png"),
-                ),
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.pushNamed(context, 'res');
                 },
-                child: Text("create account | Sign in",style: TextStyle(color: Colors.red),),
+                child: Text(
+                  "create account | Sign in",
+                  style: TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),

@@ -53,7 +53,7 @@ class _Third_PageState extends State<Third_Page> {
                                           child: YoutubePlayer(
                                             controller: YoutubePlayerController(
                                                 initialVideoId:
-                                                    "${l1.items![index].id!.videoId}"),
+                                                "${l1.items![index].id!.videoId}"),
                                           ),
                                         ),
                                       ),
@@ -73,63 +73,6 @@ class _Third_PageState extends State<Third_Page> {
             ],
           ),
         ),
-        // Container(
-        //   height: double.infinity,
-        //   width: double.infinity,
-        //   child: Column(
-        //     children: [
-        //       Expanded(
-        //         child: FutureBuilder<Youtube>(
-        //             future: YoutubeData().getData(),
-        //             builder: (context, AsyncSnapshot snapshot) {
-        //               if (snapshot.hasError) {
-        //                 return Center(child: Text("${snapshot.error}"));
-        //               } else if (snapshot.hasData) {
-        //                 Youtube l1 = snapshot.data;
-        //                 return Column(
-        //                   children: [
-        //                     Expanded(
-        //                       child: ListView.builder(
-        //                         itemCount: l1.items!.length,
-        //                         itemBuilder: (context, index) {
-        //                           return Column(
-        //                             children: [
-        //                               Row(
-        //                                 children: [
-        //                                   Container(
-        //                                     height: 100,
-        //                                     width: 150,
-        //                                     padding: EdgeInsets.all(10),
-        //                                     child: GestureDetector(
-        //                                       onTap: (){
-        //                                         Navigator.pushReplacementNamed(
-        //                                             context, 'second',
-        //                                             arguments: l1.items![index]);
-        //                                       },
-        //                                       child: YoutubePlayer(
-        //                                         controller: YoutubePlayerController(
-        //                                             initialVideoId:
-        //                                             "${l1.items![index].id}"),
-        //                                       ),
-        //                                     ),
-        //                                   ),
-        //                                   Expanded(child: Text("${l1.items![index].snippet!.title}"),),
-        //                                 ],
-        //                               ),
-        //                             ],
-        //                           );
-        //                         },
-        //                       ),
-        //                     ),
-        //                   ],
-        //                 );
-        //               }
-        //               return Center(child: CircularProgressIndicator());
-        //             }),
-        //       ),
-        //     ],
-        //   ),
-        // ),
       ),
     );
   }
