@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtubeapi/screen/provider/reviprovider.dart';
+import 'package:youtubeapi/screen/home/thirdpage.dart';
+import '../getclass/reviprovider.dart';
 
 class Fourth_Page extends StatefulWidget {
   const Fourth_Page({Key? key}) : super(key: key);
@@ -19,7 +21,8 @@ class _Fourth_PageState extends State<Fourth_Page> {
           backgroundColor: Colors.red,
           leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, 'third');
+              Get.to(Third_Page());
+              // Navigator.pushReplacementNamed(context, 'third');
             },
             icon: Icon(Icons.arrow_back),
           ),
@@ -70,11 +73,11 @@ class _Fourth_PageState extends State<Fourth_Page> {
             ),
             Expanded(
                 child: SingleChildScrollView(
-                  child: Text(
-              "${t1.snippet!.description}",
-              style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
-            ),
-                )),
+              child: Text(
+                "${t1.snippet!.description}",
+                style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+              ),
+            )),
           ],
         ),
       ),

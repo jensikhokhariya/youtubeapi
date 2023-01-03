@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtubeapi/screen/provider/relatedvideo.dart';
-import 'package:youtubeapi/screen/provider/reviprovider.dart';
+import 'package:youtubeapi/screen/getclass/relatedvideo.dart';
+import 'package:youtubeapi/screen/getclass/reviprovider.dart';
+import 'package:youtubeapi/screen/home/second_Page.dart';
 
 class Third_Page extends StatefulWidget {
   const Third_Page({Key? key}) : super(key: key);
@@ -40,11 +42,16 @@ class _Third_PageState extends State<Third_Page> {
                                 itemCount: l1.items!.length,
                                 itemBuilder: (context, index) {
                                   return Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       GestureDetector(
-                                        onTap: (){
-                                          Navigator.pushReplacementNamed(context, 'fourth',arguments: l1.items![index]);
+                                        onTap: () {
+                                          Get.toNamed('/fourth',arguments: l1.items![index]);
+                                          Get.offAll(Second_Page());
+                                          // Navigator.pushReplacementNamed(context, 'fourth',arguments: l1.items![index]);
+                                          // Get.toNamed('/fourth',
+                                          //     arguments: l1.items![index]);
                                         },
                                         child: Container(
                                           height: 100,
@@ -53,12 +60,16 @@ class _Third_PageState extends State<Third_Page> {
                                           child: YoutubePlayer(
                                             controller: YoutubePlayerController(
                                                 initialVideoId:
-                                                "${l1.items![index].id!.videoId}"),
+                                                    "${l1.items![index].id!.videoId}"),
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 5,),
-                                      Expanded(child: Text("${l1.items![index].snippet!.title}")),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Expanded(
+                                          child: Text(
+                                              "${l1.items![index].snippet!.title}")),
                                     ],
                                   );
                                 },

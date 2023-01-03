@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtubeapi/screen/provider/h_class.dart';
-import 'package:youtubeapi/screen/provider/homeprovider.dart';
-import '../provider/lrprovider.dart';
+import 'package:youtubeapi/screen/getclass/lrprovider.dart';
+import '../getclass/h_class.dart';
+import '../getclass/homeprovider.dart';
 
 class Home_Page extends StatefulWidget {
   const Home_Page({Key? key}) : super(key: key);
@@ -14,30 +16,24 @@ class Home_Page extends StatefulWidget {
 
 class _Home_PageState extends State<Home_Page> {
   TextEditingController f1 = TextEditingController();
-  LProvider hprovider = LProvider();
+  Login login1 = Get.put(Login());
   String data = "";
-  bool login = false;
+  User? user;
+  Login l2 = Get.put(Login());
+  bool isSwitched = false;
   SharedPreferences? logindata;
   String? username;
+  bool _isDark = false;
+  bool get isDark => _isDark;
 
-  // String livedata = "";
-  // List<Map<String, dynamic>> l2 = [];
-
-  /*int select = 0;
-  List sel = [
-    Home_Page(),
-    Third_Page(),
-    Subscribe_Page(),
-  ];*/
-
-  // List<Youtube> _MyAllData = [];
-  // var snippet = [];
-  bool isVisible=false;
   @override
   void initState() {
     super.initState();
+    user1();
     initial();
-     // getData();
+    // themeMode;
+    // toggleTheme(false);
+    // toggle(true);
   }
 
   void initial() async {
@@ -47,13 +43,27 @@ class _Home_PageState extends State<Home_Page> {
     });
   }
 
-   // Future<List<Map<String, dynamic>>> getData({String? later}) async {
-   //  List<Map<String, dynamic>> l1 = await l2;
-   //  setState(() {
-   //    l2 = l1;
-   //  });
-   //  return l1;
-   // }
+  // void toggle(bool newValue) {
+  //   _isDark = newValue;
+  //   if (_theme == ThemeMode.light) {
+  //     _theme = ThemeMode.dark;
+  //   } else {
+  //     _theme = ThemeMode.light;
+  //   }
+  // }
+  
+  dynamic user1() {
+    var firebaseAuth = FirebaseAuth.instance;
+    user = firebaseAuth.currentUser;
+  }
+  
+  // ThemeMode _theme = ThemeMode.light;
+  // ThemeMode get themeMode => _theme;
+  // dynamic toggleTheme(bool isDark) {
+  //   _theme = isDark ? ThemeMode.dark : ThemeMode.light;
+  // }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +76,11 @@ class _Home_PageState extends State<Home_Page> {
             IconButton(
               onPressed: () {
                 logindata?.setBool('login', true);
-                Navigator.pushReplacementNamed(context, '/');
+                Get.toNamed('/');
+                //Navigator.pushReplacementNamed(context, '/');
+                // login1.signOut();
+                // login1.cheakUser();
+                // Get.offAll(Login_Page());
               },
               icon: Icon(
                 Icons.logout_rounded,
@@ -75,33 +89,41 @@ class _Home_PageState extends State<Home_Page> {
             ),
           ],
         ),
-       /* bottomNavigationBar: Container(
-          height: 60,
-          width: double.infinity,
-          color: Colors.red,
-          child: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_rounded),
-                label: "Home",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.video_library),
-                label: "Videos",
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.subscriptions_outlined),
-                label: "Subscribe",
+        drawer: Drawer(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Text("Change Theme"),
+                  Spacer(),
+                  // Switch(
+                  //     value: l2.toggleTheme(isSwitched), onChanged: (value) {
+                  //       setState(() {
+                  //         l2.toggleTheme(value);
+                  //       });
+                  // }),
+                  Switch(
+                    value: isSwitched,
+                    activeColor: Colors.red,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                      });
+                    },
+                  ),
+                  /*Switch(
+                    value: true,
+                    onChanged: (value){
+                      setState(() {
+                       _theme = toggleTheme(true);
+                      });
+                    },
+                  ),*/
+                ],
               ),
             ],
-            currentIndex: select,
-            selectedItemColor: Colors.white,
-            onTap: onitem,
-            iconSize: 30,
-            backgroundColor: Colors.red,
-            elevation: 5,
           ),
-        ),*/
+        ),
         body: Container(
           height: double.infinity,
           width: double.infinity,
@@ -119,29 +141,6 @@ class _Home_PageState extends State<Home_Page> {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Card(
-                              elevation: 2,
-                              color: Colors.white,
-                              shadowColor: Colors.red,
-                              child: Container(
-                                height: 35,
-                                child: TextField(
-                                  controller: f1,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    prefixIcon: Icon(
-                                      Icons.search,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isVisible=true;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ),
                             SizedBox(
                               height: 5,
                             ),
@@ -157,8 +156,7 @@ class _Home_PageState extends State<Home_Page> {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
-                                            Navigator.pushReplacementNamed(
-                                                context, 'second',
+                                            Get.toNamed('/second',
                                                 arguments: l1.items![index]);
                                           },
                                           child: YoutubePlayer(
@@ -188,17 +186,16 @@ class _Home_PageState extends State<Home_Page> {
                                               Text(
                                                 "${l1.items![index].snippet!.channelTitle}",
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                    color: Colors.black),
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                ),
                                               ),
                                               Text(
                                                 "${l1.items![index].snippet!.title}",
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    fontSize: 10,
-                                                    color: Colors.black87),
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 10,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -222,45 +219,4 @@ class _Home_PageState extends State<Home_Page> {
       ),
     );
   }
-
-/* _searchbar() {
-//   return Padding(
-//     padding: const EdgeInsets.all(8.0),
-//     child: TextField(
-//       decoration: InputDecoration(hintText: "Search ..."),
-//       onChanged: (text) {
-//         text = text.toLowerCase();
-//         setState(() {
-//           snippet = _MyAllData.where((Snippet) {
-//             var idticket = Snippet;
-//             return idticket.items!.contains(text);
-//           }).toList();
-//         });
-//       },
-//     ),
-//   );
- }*/
-
- // void search(String later) async {
- //    List<Map<String, dynamic>> data = await getData();
- //    List<Map<String, dynamic>> filterdata = [];
- //
- //    for (int i = 0; i < data.length; i++) {
- //      if (data[i]['snippet']
- //          .toString()
- //          .toLowerCase()
- //          .contains(later.toLowerCase())) {
- //        filterdata.add(data[i]);
- //        setState(() {
- //          l2 = filterdata;
- //        });
- //      }
- //    }
- //   }
-
- /* void onitem(int index) {
-    setState(() {
-      select = index;
-    });
-  }*/
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:youtubeapi/screen/provider/homeprovider.dart';
+import 'package:youtubeapi/screen/getclass/homeprovider.dart';
+import 'package:youtubeapi/screen/home/fourthpage.dart';
+import 'package:youtubeapi/screen/home/home_screen.dart';
 
 class Second_Page extends StatefulWidget {
   const Second_Page({Key? key}) : super(key: key);
@@ -12,14 +15,14 @@ class Second_Page extends StatefulWidget {
 class _Second_PageState extends State<Second_Page> {
   @override
   Widget build(BuildContext context) {
-    Item y1 = ModalRoute.of(context)!.settings.arguments as Item;
+    Item y1 = ModalRoute.of(context)!.settings.arguments as Item ;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
           leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, 'home');
+              Get.to(Home_Page());
             },
             icon: Icon(Icons.arrow_back),
           ),
@@ -36,7 +39,8 @@ class _Second_PageState extends State<Second_Page> {
                 width: 500,
                 padding: EdgeInsets.all(10),
                 child: YoutubePlayer(
-                  controller: YoutubePlayerController(initialVideoId: "${y1.id}"),
+                  controller:
+                      YoutubePlayerController(initialVideoId: "${y1.id}"),
                 ),
               ),
               Row(
@@ -82,7 +86,7 @@ class _Second_PageState extends State<Second_Page> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(context, 'fourth');
+                          Get.to(Fourth_Page(),);
                         },
                         icon: Icon(
                           Icons.subscriptions_outlined,
@@ -104,7 +108,8 @@ class _Second_PageState extends State<Second_Page> {
                 child: SingleChildScrollView(
                   child: Text(
                     "${y1.snippet!.description}",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                    style:
+                        TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
                   ),
                 ),
               ),

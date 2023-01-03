@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:youtubeapi/screen/provider/reviprovider.dart';
+import 'package:youtubeapi/screen/getclass/reviprovider.dart';
 
-class YoutubeData1{
+class YoutubeData1 {
   Future<Related> getData1() async {
     String link =
         "https://youtube.googleapis.com/youtube/v3/search?part=snippet&regionCode=IN&relatedToVideoId=7lCDEYXw3mM&type=video&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import '../provider/lrprovider.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:youtubeapi/screen/home/login_screen.dart';
+import '../getclass/lrprovider.dart';
 
 class Register_Page extends StatefulWidget {
   const Register_Page({Key? key}) : super(key: key);
@@ -11,7 +14,7 @@ class Register_Page extends StatefulWidget {
 class _Register_PageState extends State<Register_Page> {
   TextEditingController e1 = TextEditingController();
   TextEditingController p1 = TextEditingController();
-  LProvider hprovider = LProvider();
+  Login login1 = Get.put(Login());
   bool login = false;
 
   @override
@@ -51,16 +54,13 @@ class _Register_PageState extends State<Register_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var re = await hprovider.createuser(e1.text, p1.text);
-                  print(re);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text("$re"),
-                    ),
-                  );
-                  if (re == "Success") {
-                    Navigator.pushReplacementNamed(context, 'home');
-                    hprovider.cheakUser();
+                  var res = await login1.createuser(e1.text, p1.text);
+                  Get.snackbar("Login", "$res");
+                  if (res == "Success") {
+                    Get.to(
+                      Login_Page(),
+                    );
+                    login1.cheakUser();
                   }
                 },
                 child: Text("Sign up"),

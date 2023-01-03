@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LProvider extends ChangeNotifier {
+class Login extends GetxController {
   Future<String> createuser(String email, String password) async {
     String note = "";
     var firebaseAuth = FirebaseAuth.instance;
@@ -51,6 +52,29 @@ class LProvider extends ChangeNotifier {
     }
     return false;
   }
+
+  /* theme change */
+  // ThemeMode _theme = ThemeMode.light;
+  //
+  // ThemeMode get themeMode => _theme;
+  //
+  // dynamic toggleTheme(bool isDark) {
+  //   _theme = isDark ? ThemeMode.dark : ThemeMode.light;
+  // }
+  //
+  // bool _isDark = false;
+  // bool get isDark => _isDark;
+  //
+  // Future<void> toggle(bool newValue) async {
+  //   _isDark = newValue;
+  //   if (_theme == ThemeMode.light) {
+  //     _theme = ThemeMode.dark;
+  //   } else {
+  //     _theme = ThemeMode.light;
+  //   }
+  // }
+
+
 
   void signOut() {
     var firebaseAuth = FirebaseAuth.instance;

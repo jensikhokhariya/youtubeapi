@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:youtubeapi/screen/getclass/lrprovider.dart';
 import 'package:youtubeapi/screen/home/home_screen.dart';
-import 'package:youtubeapi/screen/provider/lrprovider.dart';
+import 'package:youtubeapi/screen/home/register_screen.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({Key? key}) : super(key: key);
@@ -13,7 +16,7 @@ class Login_Page extends StatefulWidget {
 class _Login_PageState extends State<Login_Page> {
   TextEditingController e1 = TextEditingController();
   TextEditingController p1 = TextEditingController();
-  LProvider hprovider = LProvider();
+  Login login = Get.put(Login());
   SharedPreferences? logindata;
   bool? newuser;
 
@@ -77,12 +80,12 @@ class _Login_PageState extends State<Login_Page> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var res = await hprovider.createuser(e1.text, p1.text);
-                  print(res);
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("$res")));
+                  var res = await login.createuser(e1.text, p1.text);
+                  Get.snackbar("Login", "$res");
                   if (res == "Success") {
-                    Navigator.pushReplacementNamed(context, 'home');
+                    Get.to(
+                      Home_Page(),
+                    );
                   }
                   String username = e1.text;
                   String password = p1.text;
@@ -90,7 +93,7 @@ class _Login_PageState extends State<Login_Page> {
                     print('Successfull');
                     logindata?.setBool('login', false);
                     logindata?.setString('username', username);
-                    Navigator.pushNamed(context, '/');
+                    Get.toNamed('/');
                   }
                 },
                 child: Text("Login"),
@@ -101,13 +104,16 @@ class _Login_PageState extends State<Login_Page> {
               ),
               GestureDetector(
                 onTap: () {
-                  hprovider.googleSignIn();
+                  login.googleSignIn();
+                  Get.off(
+                    Home_Page(),
+                  );
                 },
                 child: Image.asset("assets/images/google.png"),
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, 'res');
+                  Get.to(Register_Page());
                 },
                 child: Text(
                   "create account | Sign in",
