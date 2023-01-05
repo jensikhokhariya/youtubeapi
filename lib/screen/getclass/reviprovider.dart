@@ -26,6 +26,8 @@ class Related {
         "etag": etag,
         "items": List<dynamic>.from(items!.map((x) => x.toJson())),
       };
+
+  fromjson(Map<String, dynamic> val) {return Items();}
 }
 
 class Items {
@@ -203,7 +205,7 @@ class EnumValues<T> {
 
   Map<T, String>? get reverse {
     if (reverseMap == null) {
-      reverseMap = map!.map((k, v) => new MapEntry(v, k));
+      reverseMap = map!.map((k, v) => MapEntry(v, k));
     }
     return reverseMap;
   }

@@ -19,21 +19,15 @@ class _Home_PageState extends State<Home_Page> {
   Login login1 = Get.put(Login());
   String data = "";
   User? user;
-  Login l2 = Get.put(Login());
   bool isSwitched = false;
   SharedPreferences? logindata;
   String? username;
-  bool _isDark = false;
-  bool get isDark => _isDark;
 
   @override
   void initState() {
     super.initState();
     user1();
     initial();
-    // themeMode;
-    // toggleTheme(false);
-    // toggle(true);
   }
 
   void initial() async {
@@ -43,28 +37,10 @@ class _Home_PageState extends State<Home_Page> {
     });
   }
 
-  // void toggle(bool newValue) {
-  //   _isDark = newValue;
-  //   if (_theme == ThemeMode.light) {
-  //     _theme = ThemeMode.dark;
-  //   } else {
-  //     _theme = ThemeMode.light;
-  //   }
-  // }
-  
   dynamic user1() {
     var firebaseAuth = FirebaseAuth.instance;
     user = firebaseAuth.currentUser;
   }
-  
-  // ThemeMode _theme = ThemeMode.light;
-  // ThemeMode get themeMode => _theme;
-  // dynamic toggleTheme(bool isDark) {
-  //   _theme = isDark ? ThemeMode.dark : ThemeMode.light;
-  // }
-
-  
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -77,10 +53,6 @@ class _Home_PageState extends State<Home_Page> {
               onPressed: () {
                 logindata?.setBool('login', true);
                 Get.toNamed('/');
-                //Navigator.pushReplacementNamed(context, '/');
-                // login1.signOut();
-                // login1.cheakUser();
-                // Get.offAll(Login_Page());
               },
               icon: Icon(
                 Icons.logout_rounded,
@@ -96,29 +68,13 @@ class _Home_PageState extends State<Home_Page> {
                 children: [
                   Text("Change Theme"),
                   Spacer(),
-                  // Switch(
-                  //     value: l2.toggleTheme(isSwitched), onChanged: (value) {
-                  //       setState(() {
-                  //         l2.toggleTheme(value);
-                  //       });
-                  // }),
                   Switch(
-                    value: isSwitched,
-                    activeColor: Colors.red,
-                    onChanged: (value) {
-                      setState(() {
-                        isSwitched = value;
-                      });
-                    },
-                  ),
-                  /*Switch(
-                    value: true,
-                    onChanged: (value){
-                      setState(() {
-                       _theme = toggleTheme(true);
-                      });
-                    },
-                  ),*/
+                      value: isSwitched,
+                      onChanged: (bool value) {
+                        setState(() {
+                          isSwitched = value;
+                        });
+                      }),
                 ],
               ),
             ],
@@ -131,10 +87,11 @@ class _Home_PageState extends State<Home_Page> {
           child: Column(
             children: [
               Expanded(
-                child: FutureBuilder<Youtube>(
-                    future: YoutubeData().getData(),
+                child: FutureBuilder<Response<Youtube>> (
+                    future: YoutubeData().getData(data),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
+                        print("object${snapshot.error}");
                         return Center(child: Text("${snapshot.error}"));
                       } else if (snapshot.hasData) {
                         Youtube l1 = snapshot.data;
@@ -146,7 +103,7 @@ class _Home_PageState extends State<Home_Page> {
                             ),
                             Expanded(
                               child: ListView.builder(
-                                  itemCount: l1.items!.length,
+                                  itemCount:l1.items!.length,
                                   itemBuilder: (context, index) {
                                     return Column(
                                       crossAxisAlignment:

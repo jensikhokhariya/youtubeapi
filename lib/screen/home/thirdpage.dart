@@ -13,6 +13,7 @@ class Third_Page extends StatefulWidget {
 }
 
 class _Third_PageState extends State<Third_Page> {
+  String data = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -28,8 +29,8 @@ class _Third_PageState extends State<Third_Page> {
           child: Column(
             children: [
               Expanded(
-                child: FutureBuilder<Related>(
-                    future: YoutubeData1().getData1(),
+                child: FutureBuilder<Response<Related>>(
+                    future: YoutubeData1().getData1(data),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
                         return Center(child: Text("${snapshot.error}"));

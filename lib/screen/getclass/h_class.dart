@@ -1,16 +1,24 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 import 'package:youtubeapi/screen/getclass/homeprovider.dart';
 
-class YoutubeData {
-  Future<Youtube> getData() async {
-    String link =
-        "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=5&regionCode=IN&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
+ class YoutubeData extends GetxController {
+   String link =
+       "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=5&regionCode=IN&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM";
+  Future<Response<Youtube>> getData(link) async => await link;
+
+}
+
+abstract class HomeProvider extends GetConnect implements YoutubeData {
+   @override
+  Future<Youtube> onInit()async {
+    httpClient.defaultDecoder = (val) => Youtube().fromjson(val as Map<String, dynamic>);
     Uri uri = Uri.parse(link);
-    var res = await http.get(uri);
+    var res = await get("$uri");
     var v1 = jsonDecode(res.body);
     print("object : ${jsonEncode(v1)}");
     return Youtube.fromJson(v1);
   }
+  @override
+  Future<Response<Youtube>> getData(link) => get(link.toString());
 }
-//"https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyCAw6PmSZ8cYwiX5WA_hzpuDTOOe8d05EM&fields=items(id,snippet(channelId,title,categoryId),statistics)&part=snippet,statistics"

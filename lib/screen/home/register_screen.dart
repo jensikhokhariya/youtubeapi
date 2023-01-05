@@ -64,7 +64,7 @@ class _Register_PageState extends State<Register_Page> {
                   }
                 },
                 child: Text("Sign up"),
-                style: ElevatedButton.styleFrom(primary: Colors.red),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
               ),
             ],
           ),
