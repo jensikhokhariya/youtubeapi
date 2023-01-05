@@ -26,7 +26,6 @@ class Youtube {
     nextPageToken: json["nextPageToken"],
     pageInfo: PageInfo.fromJson(json["pageInfo"]),
   );
-
   Map<String, dynamic> toJson() => {
     "kind": kind,
     "etag": etag,
@@ -37,7 +36,7 @@ class Youtube {
 
   fromjson(Map<String, dynamic> val) {return Future(() => Item());}
 
-  getData(Item item) {return Future(() => Item());}
+  Future<Item> getData(Item items) async => Future(() => Item());
 
 }
 
