@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^4.1.5
   google_sign_in: ^5.4.2
   provider: ^6.0.5
+  http: ^0.13.5
   flutter_inappwebview: ^5.4.3+7
   shared_preferences: ^2.0.15
   youtube_player_flutter: ^8.1.1
