@@ -22,7 +22,6 @@ class _Home_PageState extends State<Home_Page> {
   bool isSwitched = false;
   SharedPreferences? logindata;
   String? username;
-
   @override
   void initState() {
     super.initState();
