@@ -12,7 +12,7 @@ import 'package:youtubeapi/screen/getclass/homeprovider.dart';
 abstract class HomeProvider extends GetConnect implements YoutubeData {
    @override
   Future<Youtube> onInit()async {
-    httpClient.defaultDecoder = (val) => Youtube().fromjson(val as Map<String, dynamic>);
+     httpClient.defaultDecoder = (val) => Youtube.fromJson(val as Map<String, dynamic>);
     Uri uri = Uri.parse(link);
     var res = await get("$uri");
     var v1 = jsonDecode(res.body);
